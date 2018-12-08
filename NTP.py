@@ -33,4 +33,3 @@ def nowNTPtime():
     return(time)
 
 
-
