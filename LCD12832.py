@@ -130,9 +130,12 @@ def Display_8x16_string(page, cloumn, str):
 
 
 def Display_Message(type, info):
+  if type == 0:
+    SetClearTime(3)
+    Display_6x8_string(2, 1, "      Welcome      ")
+  else:
     LCD_init()
     LCD_clear()
-    GPIO_H(LCD_BGLED) #背光灯
     if type == 1:
         Display_16x32(1, 0, codetab.f16x32[1])
         Display_16x32(1, 1, codetab.f16x32[2])
@@ -157,6 +160,7 @@ def init():
 
 def SetClearTime(sec):
     global ClearFlag
+    GPIO_H(LCD_BGLED) #背光灯
     ClearFlag = sec
  
 def RefreshTime():
@@ -180,6 +184,7 @@ def RefreshTime():
 #    time.sleep(2)
 #    Display_Message(1, "UserName")
 #    time.sleep(2)
+
 
 
 

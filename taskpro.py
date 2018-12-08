@@ -8,7 +8,7 @@ import LCD12832
 import WIFI
 import Tcp
 
-deviceID = "你的Tlink物联网设备号"
+deviceID = "5S798O3514V1WT0Y"
 ptime = 0
 TCP_ResetFlag = 0
 def AntiDeathloop(): #将P23拉低即可中断程序继续
@@ -19,7 +19,7 @@ def AntiDeathloop(): #将P23拉低即可中断程序继续
 
 def init():
   AntiDeathloop()
-  sensor.init_switch()
+  sensor.init()
   try:
     LCD12832.init()
     LCD12832.Display_6x8_string(4, 1, "System initializing")
@@ -48,15 +48,15 @@ def Send_login():
 def Send_SensorData(*name):
   try:
     if not name == ():
-      Tcp.TCP_Send("#{},{}#".format(name[0],sensor.get_SwitchData(0)))
+      recentPerson = name[0]
     else:
-      Tcp.TCP_Send("#,{}#".format(sensor.get_SwitchData(0)))
+      recentPerson = ""
+    Tcp.TCP_Send("#{},{},{},{}#".format(recentPerson,sensor.get_SwitchData(0),sensor.get_SensorData(0),sensor.get_SensorData(1)))
   except:
     print("An Error occoured in 'Send_SensorData'")
     pass
   
 def Timer_list():
-  print("-")
   try:
     global ptime
     global TCP_ResetFlag
@@ -64,7 +64,7 @@ def Timer_list():
     if ptime%(50/10) == 0:
       Tcp.TCP_Recv()
     if ptime%(1000/10) == 0:
-      print(ptime)
+
       LCD12832.RefreshTime()
       sensor.Door_Control()
     if ptime%(30000/10) == 0:
@@ -85,6 +85,7 @@ def init_mainTimer():
 def init_WIFITimer():
   tim4 = Timer(4)
   tim4.init(period=2600, mode=Timer.ONE_SHOT, callback=lambda t: Init_wifiConnect())
+
 
 
 
