@@ -87,25 +87,3 @@ def init_WIFITimer():
   tim4.init(period=2600, mode=Timer.ONE_SHOT, callback=lambda t: Init_wifiConnect())
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
