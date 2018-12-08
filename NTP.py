@@ -32,4 +32,3 @@ def nowNTPtime():
     #print (year,'-','%02d' % month, '-','%02d'% mday, ' ', '%2d'% hour, ':', '%02d'% minute, ':','%02d'% second, '  Week:',weekday+1, sep = '')
     return(time)
 
-
