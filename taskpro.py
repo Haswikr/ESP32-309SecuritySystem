@@ -8,7 +8,7 @@ import LCD12832
 import WIFI
 import Tcp
 
-deviceID = "5S798O3514V1WT0Y"
+deviceID = "YourDeviceID"
 ptime = 0
 TCP_ResetFlag = 0
 def AntiDeathloop(): #将P23拉低即可中断程序继续
